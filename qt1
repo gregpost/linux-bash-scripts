@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Define URLs to download Qt packages
+QT_BASE_URL="https://download.qt.io/official_releases/qt/6.7/6.7.2/submodules/qtbase-everywhere-src-6.7.2.tar.xz"
+QT_COMPAT_URL="https://download.qt.io/official_releases/qt/6.7/6.7.2/submodules/qt5compat-everywhere-src-6.7.2.tar.xz"
+
+# Define directory to store downloaded tarballs and build files
+DOWNLOAD_DIR="$HOME/app/qt_installation"
+
+# Create directory
+echo "Creating download directory at $DOWNLOAD_DIR..."
+mkdir -p "$DOWNLOAD_DIR"
+cd "$DOWNLOAD_DIR" || { echo "Failed to change directory"; exit 1; }
+
+# Download Qt source packages
+echo "Downloading Qt base package from $QT_BASE_URL..."
+wget "$QT_BASE_URL" -O qtbase-everywhere-src-6.7.2.tar.xz
+
+echo "Downloading Qt compatibility package from $QT_COMPAT_URL..."
+wget "$QT_COMPAT_URL" -O qt5compat-everywhere-src-6.7.2.tar.xz
+
+# Extract downloaded tarballs
+echo "Extracting Qt base package..."
+tar -xf qtbase-everywhere-src-6.7.2.tar.xz
+
+echo "Extracting Qt compatibility package..."
+tar -xf qt5compat-everywhere-src-6.7.2.tar.xz

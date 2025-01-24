@@ -4,4 +4,4 @@ apt update && apt install -y sudo git \
     wget \  # for downloading from url
     build-essential libgl1-mesa-dev cmake  # build tools
 
-apt install nano python3-pip python3-venv
+apt install -y nano python3-pip python3-venv
