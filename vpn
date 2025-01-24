@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Install WireGuard
+echo "Installing WireGuard..."
+sudo apt install -y wireguard
+
+# Define the configuration file path
+WG_CONFIG_SOURCE="./wg0.conf" # Please ensure wg0.conf is in the same directory or provide the correct path
+WG_CONFIG_DEST="/etc/wireguard/wg0.conf"
+
+# Copy wg0.conf to /etc/wireguard
+if [ -f "$WG_CONFIG_SOURCE" ]; then
+    echo "Copying $WG_CONFIG_SOURCE to $WG_CONFIG_DEST..."
+    sudo cp "$WG_CONFIG_SOURCE" "$WG_CONFIG_DEST"
+
+    sudo wg-quick up wg0
+
+    echo "WireGuard is up and running with the configuration from $WG_CONFIG_DEST."
+else
+    echo "Error: $WG_CONFIG_SOURCE does not exist. Please provide the correct path to your wg0.conf file."
+    exit 1
+fi
