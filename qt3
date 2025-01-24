@@ -1,0 +1,19 @@
+#!/bin/bash
+
+QT_VERSION="6.7.2"
+DOWNLOAD_DIR="/app/qt_installation"
+QT_BASE_BUILD_DIR="$DOWNLOAD_DIR/qt-base-build"
+QT_COMAT_BUILD_DIR="$DOWNLOAD_DIR/qt-compat-build"
+
+echo "Installing Qt base..."
+sudo make -C "$QT_BASE_BUILD_DIR" install
+
+echo "Add Qt path to envirement variable..."
+export PATH="/usr/local/Qt-$QT_VERSION/bin:$PATH"
+export PATH="/usr/local/Qt-$QT_VERSION/lib:$PATH"
+export PATH="/usr/local/Qt-$QT_VERSION/lib/cmake/Qt6:$PATH"
+
+echo "Installing Qt compatibility module..."
+sudo make -C "$QT_COMAT_BUILD_DIR" install
+
+echo "Qt 6.7.2 installation is complete."

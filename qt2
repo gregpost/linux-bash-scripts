@@ -1,0 +1,34 @@
+#!/bin/bash
+
+QT_VERSION="6.7.2"
+DOWNLOAD_DIR="/app/qt_installation"
+QT_BASE_DIR="$DOWNLOAD_DIR/qtbase-everywhere-src-$QT_VERSION"
+QT_COMPAT_DIR="$DOWNLOAD_DIR/qt5compat-everywhere-src-$QT_VERSION"
+QT_BASE_BUILD_DIR="$DOWNLOAD_DIR/qt-base-build"
+QT_COMAT_BUILD_DIR="$DOWNLOAD_DIR/qt-compat-build"
+
+# Create build directory
+sudo rm -r "$QT_BASE_BUILD_DIR"
+sudo mkdir -p "$QT_BASE_BUILD_DIR"
+
+# Build and install Qt base
+echo "Configuring Qt base with CMake..."
+cmake -S "$QT_BASE_DIR" -B "$QT_BASE_BUILD_DIR"
+
+echo "Building Qt base..."
+make -C "$QT_BASE_BUILD_DIR" clean
+make -C "$QT_BASE_BUILD_DIR" -j$(nproc)
+
+# Create build directory
+sudo rm -r "$QT_COMAT_BUILD_DIR"
+sudo mkdir -p "$QT_COMAT_BUILD_DIR"
+
+# Build and install Qt compatibility module
+echo "Configuring Qt compatibility module with CMake..."
+cmake -S "$QT_COMPAT_DIR" -B "$QT_COMAT_BUILD_DIR"
+
+echo "Building Qt compatibility module..."
+make -C "$QT_COMAT_BUILD_DIR" clean
+make -C "$QT_COMAT_BUILD_DIR" -j$(nproc)
+
+echo "Qt 6.7.2 builing is complete."
