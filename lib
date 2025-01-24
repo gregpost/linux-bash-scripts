@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo apt update
+sudo apt install libvtk9-dev
+sudo apt install libvtk9-qt-dev
+sudo apt install libvtk-dicom-dev
+sudo apt install libquazip1-qt6-dev
+sudo apt install zlib1g-dev
+sudo apt install libgdcm-dev
+sudo apt install libdcmtk-dev
